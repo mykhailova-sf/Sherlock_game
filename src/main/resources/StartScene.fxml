@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+
+<?import javafx.geometry.Insets?>
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.sherlocheck.controller.StartSceneController"
+      spacing="10" alignment="TOP_CENTER" prefWidth="450" prefHeight="500">
+
+    <HBox spacing="10">
+        <padding>
+            <Insets top="10" right="10" bottom="10" left="10"/>
+        </padding>
+        <RadioButton text="Create new game" fx:id="labelRadio" onAction="#showLabelView"/>
+        <RadioButton text="Find game" fx:id="listRadio" onAction="#showListView"/>
+    </HBox>
+
+    <VBox fx:id="dynamicContainer" spacing="10">
+        <padding>
+            <Insets top="10" right="10" bottom="10" left="10"/>
+        </padding>
+    </VBox>
+</VBox>
