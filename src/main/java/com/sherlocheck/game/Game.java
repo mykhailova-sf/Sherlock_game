@@ -33,6 +33,22 @@ public class Game {
         }
     }
 
+    public static String whoIsWinner() {
+        Player.ROLE winnerRole;
+
+        if (detectiveCount == storytellerCount) {
+            return "The game ended in a draw.";
+        } else if(detectiveCount > storytellerCount) {
+            winnerRole = Player.ROLE.DETECTIVE;
+        } else {
+            winnerRole = Player.ROLE.STORYTELLER;
+        }
+
+        return  (winnerRole == getCurrentRole())
+                ? "You won"
+                : "You lost";
+    }
+
     public static Round getCurrentRound() {
         return currentRound;
     }
@@ -72,7 +88,6 @@ public class Game {
 
     public static void resetGame() {
         resetCounters();
-        resetRoundNumber();
         setNewRound(null);
         try {
             getGameConnection().close();
@@ -87,5 +102,9 @@ public class Game {
 
     public static Player.ROLE getCurrentRole() {
         return playerRole;
+    }
+
+    public static String getScoreText() {
+        return "Detective: " + Game.getDetectiveCount() + " Storyteller: " + Game.getStorytellerCount();
     }
 }

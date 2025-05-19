@@ -21,4 +21,6 @@ public interface GameConnection {
     void setChatMessageHandler(Consumer<ChatMessage> handler);
 
     void setTimeoutHandler(Runnable timeoutHandler);
+
+    void setGameOverHandler(Runnable gameOverHandler);
 }

@@ -1,5 +1,6 @@
 package com.sherlocheck.net;
 
+import com.sherlocheck.util.PopupWindow;
 import com.sherlocheck.game.Game;
 import com.sherlocheck.game.Round;
 import com.sherlocheck.game.player.Player;
@@ -28,6 +29,7 @@ abstract class BaseGameConnection implements GameConnection {
     };
 
     private Runnable timeoutHandler;
+    private Runnable gameOverHandler;
 
     @Override
     public void setQuestionHandler(Consumer<String> questionHandler) {
@@ -109,9 +111,14 @@ abstract class BaseGameConnection implements GameConnection {
             timeoutHandler.run();
         }
         if (message instanceof GameOver) {
-            Platform.runLater(
-                    () -> SceneManager.switchScene("/StartScene.fxml")
+            gameOverHandler.run();
+            Platform.runLater(() ->
+                    PopupWindow.show(
+                            "Your partner has left the game. The game ended with the current score: ",
+                            Game.getScoreText(),
+                            () -> SceneManager.switchScene("/StartScene.fxml"))
             );
+
         }
     }
 
@@ -128,5 +135,10 @@ abstract class BaseGameConnection implements GameConnection {
     @Override
     public void setTimeoutHandler(Runnable timeoutHandler) {
         this.timeoutHandler = timeoutHandler;
+    }
+
+    @Override
+    public void setGameOverHandler(Runnable gameOverHandler) {
+        this.gameOverHandler = gameOverHandler;
     }
 }

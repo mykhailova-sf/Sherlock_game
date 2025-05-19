@@ -8,6 +8,7 @@ import com.sherlocheck.net.message.common.GameOver;
 import com.sherlocheck.net.message.detective.Timeout;
 import com.sherlocheck.net.message.storyteller.Question;
 import com.sherlocheck.net.message.common.ChatMessage;
+import com.sherlocheck.util.PopupWindow;
 import com.sherlocheck.util.SceneManager;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -84,7 +85,10 @@ public class GameSceneController {
 
         updateRoundLabel();
 
-        overGameButton.setOnAction(e -> startNewGame());
+        overGameButton.setOnAction(e -> stopCurrentGame());
+        Game.getGameConnection().setGameOverHandler(() -> {
+            stopTimer();
+        });
 
         roleLabel.setText("You are " + getCurrentRoleAsText());
 
@@ -133,13 +137,23 @@ public class GameSceneController {
         dynamicContainer.getChildren().addAll(chatList);
     }
 
+    private void stopTimer() {
+        if (timeline != null) {
+            timeline.stop();
+        }
+    }
+
     private void updateRoundLabel() {
         round.setText("Round: " + Game.getCurrentRoundNumber());
     }
 
-    private static void startNewGame() {
+    private void stopCurrentGame() {
+        stopTimer();
         Game.getGameConnection().sendMessage(new GameOver());
-        SceneManager.switchScene(SceneManager.START_SCENE);
+        PopupWindow.show(
+                "You have ended the game. The final score is: ",
+                Game.getScoreText(), () -> SceneManager.switchScene(SceneManager.START_SCENE)
+        );
     }
 
     private void initNewRoundInterface() {
@@ -173,8 +187,7 @@ public class GameSceneController {
 
     private void updateCountLabel() {
         Platform.runLater(() -> count.setText(
-                "Detective: " + Game.getDetectiveCount()
-                        + " Storyteller: " + Game.getStorytellerCount()
+                Game.getScoreText()
             )
         );
     }
@@ -183,9 +196,7 @@ public class GameSceneController {
         timerLabel.setVisible(true);
         timerLabel.setManaged(true);
 
-        if (timeline != null) {
-            timeline.stop();
-        }
+        stopTimer();
 
         timerLabel.setText("Time: " + count);
 
