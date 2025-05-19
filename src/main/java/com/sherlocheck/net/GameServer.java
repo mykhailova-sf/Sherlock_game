@@ -4,7 +4,6 @@ import com.sherlocheck.game.Game;
 import com.sherlocheck.game.player.Player;
 import com.sherlocheck.net.message.Message;
 import com.sherlocheck.net.message.client.ClientRoleRequest;
-import com.sherlocheck.net.message.common.ChatMessage;
 import com.sherlocheck.net.message.server.ClientRoleResponse;
 import com.sherlocheck.net.message.server.ServerMessage;
 

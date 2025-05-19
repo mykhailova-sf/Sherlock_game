@@ -56,7 +56,6 @@ public class StartSceneController {
     private VBox getvBox(RadioButton detectiveOption, RadioButton storytellerOption) {
         Button button = new Button("Start new game");
         button.setOnAction(e -> {
-            System.out.println(".......... TODO create and start new game");
             Starter.startServer(() ->
                     Platform.runLater(
                             () -> SceneManager.switchScene("/MainScene.fxml")

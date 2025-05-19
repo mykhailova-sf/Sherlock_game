@@ -1,6 +1,5 @@
 package com.sherlocheck.net;
 import com.sherlocheck.net.message.Message;
-import com.sherlocheck.net.message.MessageHandler;
 import com.sherlocheck.util.MessageSerializer;
 
 import java.io.*;
@@ -11,7 +10,6 @@ public class Connection {
     private final Socket socket;
     private final BufferedReader in;
     private final PrintWriter out;
-    private MessageHandler handler;
 
     private Consumer<Message> messageHandler;
 

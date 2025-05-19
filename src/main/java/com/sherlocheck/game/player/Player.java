@@ -4,6 +4,4 @@ public interface Player {
     enum ROLE {
         STORYTELLER, DETECTIVE
     }
-
-    ROLE getRole();
 }

@@ -1,7 +1,6 @@
 package com.sherlocheck.net;
 
 import com.sherlocheck.game.Game;
-import com.sherlocheck.game.Round;
 import com.sherlocheck.game.player.Player;
 import com.sherlocheck.net.message.Message;
 import com.sherlocheck.net.message.client.ClientMessage;
@@ -35,7 +34,6 @@ public class GameClient extends BaseGameConnection {
         if (message instanceof ClientRoleResponse) {
             Player.ROLE role = ((ClientRoleResponse) message).getClientRole();
             Game.setPlayerRole(role);
-            System.out.println("Received Role Response from server: " + role.name());
             Platform.runLater(() -> {
                 SceneManager.switchScene("/MainScene.fxml");
             });

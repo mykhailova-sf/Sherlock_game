@@ -28,7 +28,13 @@ public class PopupWindow {
             popupStage.close();
         });
 
-        VBox layout = new VBox(15, getLabel(message), getLabel(scoreText), getLabel(Game.whoIsWinner()), okButton);
+        VBox layout = new VBox(
+                15,
+                getLabel(message),
+                getLabel(scoreText),
+                getLabel(Game.whoIsWinner()),
+                okButton
+        );
         layout.setAlignment(Pos.CENTER);
         layout.setStyle("-fx-padding: 20;");
 

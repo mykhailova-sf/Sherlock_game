@@ -1,6 +1,5 @@
 package com.sherlocheck.net;
 
-import java.io.IOException;
 import java.net.*;
 import java.util.ArrayList;
 import java.util.Enumeration;

@@ -24,9 +24,9 @@ abstract class BaseGameConnection implements GameConnection {
 
     private Consumer<String> questionHandler;
 
-    private Consumer<Answer> answerHandler = answer -> {
-        System.out.println("Detective has decided story is " + answer.getContent());
-    };
+    private Consumer<Answer> answerHandler =
+            answer -> System.out.println("Detective has decided story is " + answer.getContent());
+
 
     private Runnable timeoutHandler;
     private Runnable gameOverHandler;
@@ -38,7 +38,6 @@ abstract class BaseGameConnection implements GameConnection {
 
     @Override
     public void setChatMessageHandler(Consumer<ChatMessage> handler) {
-        System.out.println("setChatMessageHandler: " + this.getClass().getName());
         chatMessageHandler = handler;
     }
 
@@ -123,10 +122,6 @@ abstract class BaseGameConnection implements GameConnection {
     }
 
     protected Consumer<ChatMessage> getChatMessageHandler() {
-        if (chatMessageHandler == null) {
-            System.out.println(" NULLL getChatMessageHandler: " + this.getClass().getName());
-        }
-
         return chatMessageHandler;
     }
 
