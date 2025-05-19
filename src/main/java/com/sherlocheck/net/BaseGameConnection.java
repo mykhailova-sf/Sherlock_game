@@ -89,8 +89,8 @@ abstract class BaseGameConnection implements GameConnection {
                         && message instanceof Question question
                 && questionHandler != null
         ) {
-            questionHandler.accept(question.getContent());
             Game.setNewRound(new Round(question.isAffirmationIsTrue()));
+            questionHandler.accept(question.getContent());
         }
 
         if (
